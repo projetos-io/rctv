@@ -1,1 +1,321 @@
-oi
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e50914"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdn.jsdelivr.net https://apis.google.com; connect-src *; img-src * data: blob:; media-src * blob: data:; style-src 'self' 'unsafe-inline'; frame-src https://*.firebaseapp.com https://accounts.google.com https://apis.google.com; font-src 'self' data:"><title>RCTV</title><style>.i{width:1.2em;height:1.2em;fill:currentColor;vertical-align:-.2em;flex:none}.big a{gap:10px}.b .i,.btn .i{vertical-align:middle}:root{--bg:#0a0a0a;--card:#141414;--line:#2a2a2a;--red:#e50914;--text:#f2f2f2;--dim:#9a9a9a;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+a{color:var(--red);text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:10;background:rgba(10,10,10,.92);backdrop-filter:blur(12px);padding:14px 0 10px}
+.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.logo{width:36px;height:36px;border-radius:50%;border:2px solid var(--red);color:var(--red);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;background:#000;flex:none}
+h1{font-size:18px;margin:0}h1 span{color:var(--red)}
+.search,input.f{width:100%;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:11px 18px;color:var(--text);font:inherit;font-size:14px;outline:none;margin-bottom:10px;transition:.15s}
+.search:focus,input.f:focus{border-color:var(--red)}
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:8px 14px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--dim);font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.tab.on{background:var(--red);border-color:var(--red);color:#fff}
+main{padding:14px 0 40px}.status{text-align:center;color:var(--dim);padding:40px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:.2s}
+.card:hover{border-color:var(--red);transform:translateY(-2px)}
+.thumb{height:90px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thumb.dk{background:#111}.thumb img{width:100%;height:100%;object-fit:contain;padding:8px}.thumb.dk img{object-fit:cover;padding:0}
+.fb{width:46px;height:46px;border-radius:50%;border:2px solid var(--red);color:var(--red);display:flex;align-items:center;justify-content:center;font-weight:800}
+.cb{padding:10px 12px 12px}.cn{font-size:13px;font-weight:700;min-height:32px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cs{font-size:11px;color:var(--dim);margin-top:3px}
+.star{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.6);border:0;color:#fff;border-radius:50%;width:28px;height:28px;cursor:pointer}.star.on{color:#ffc107}
+.btn{display:inline-block;background:var(--red);color:#fff;border:0;border-radius:20px;padding:10px 18px;font:inherit;font-size:13px;font-weight:700;text-transform:uppercase;cursor:pointer;transition:.15s}
+.btn:hover{filter:brightness(1.15)}.btn.o{background:var(--card);border:1px solid var(--red)}.btn:disabled{opacity:.35}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}.modal.on{display:flex}
+.modal .in{background:var(--card);border:1px solid var(--red);border-radius:14px;padding:20px;max-width:420px;width:100%}
+.big{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.big a{display:flex;align-items:center;justify-content:center;height:130px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--text);font-weight:800;font-size:18px;text-transform:uppercase;transition:.2s}
+.big a:hover{border-color:var(--red);box-shadow:0 0 20px rgba(229,9,20,.35)}
+.back{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:20px;padding:8px 14px;cursor:pointer;margin-bottom:14px}
+.txt p,.txt li{color:#b0b0b0;line-height:1.6}.txt h3{color:var(--red);text-transform:uppercase}
+</style><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script><script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script></head><body><div id="app"></div><svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-tv" viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5v2h8v-2h5a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 14H3V5h18z"/></symbol><symbol id="i-anime" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-2 14.5v-9l7 4.5z"/></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3z"/></symbol><symbol id="i-film" viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4z"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 17.3l6.2 3.7-1.6-7 5.4-4.7-7.2-.6L12 2 9.2 8.7 2 9.3l5.5 4.7-1.7 7z"/></symbol><symbol id="i-share" viewBox="0 0 24 24"><path d="M18 16a3 3 0 0 0-2 .8l-7-4a3 3 0 0 0 0-1.6l7-4A3 3 0 1 0 15 5a3 3 0 0 0 .1.8l-7 4a3 3 0 1 0 0 4.4l7.1 4.1A3 3 0 1 0 18 16z"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></symbol><symbol id="i-prev" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6L18 18V6z"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></symbol><symbol id="i-vol" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z"/></symbol><symbol id="i-mute" viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.5 2.5zM4.3 3L3 4.3 7.7 9H3v6h4l5 5v-6.7l4.3 4.3a8.8 8.8 0 0 1-2.3 1.2v2.1a11 11 0 0 0 3.7-1.9l2 2 1.3-1.3L4.3 3zM12 4L9.9 6.1 12 8.2z"/></symbol><symbol id="i-full" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7zm-2-4h2V7h3V5H5zm12 7h-3v2h5v-5h-2zM14 5v2h3v3h2V5z"/></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z"/></symbol><symbol id="i-warn" viewBox="0 0 24 24"><path d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"/></symbol><symbol id="i-dot" viewBox="0 0 24 24"><path d="M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></symbol></svg><template id="t-index">
+<header><div class="wrap"><div class="logo-row"><div class="logo">RC</div><h1>RC <span>TV</span></h1></div><input class="search" id="q" placeholder="Busca global: canais, animes, músicas..."><div id="res" class="grid"></div></div></header>
+<main class="wrap"><div style="display:flex;gap:14px;justify-content:flex-end;font-size:13px;color:var(--dim);padding-top:10px"><span id="net">Online</span><span id="bat"></span><span id="dt2"></span><span id="clk"></span></div><div class="big"><a href="#/site"><svg class="i"><use href="#i-tv"/></svg> Ao Vivo</a><a href="#/anime"><svg class="i"><use href="#i-anime"/></svg> Animes</a><a href="#/musica"><svg class="i"><use href="#i-music"/></svg> Músicas</a><a href="#" id="filmes"><svg class="i"><use href="#i-film"/></svg> Filmes</a></div>
+<div id="rec"></div><p style="text-align:center"><a href="#/settings"><svg class="i"><use href="#i-gear"/></svg> Configurações</a></p></main>
+<div class="modal" id="dlg"><div class="in"><h3 id="dt"></h3><p id="dm" style="color:var(--dim)"></p><button class="btn" onclick="this.closest('.modal').classList.remove('on')">OK</button></div></div>
+</template><template id="t-login">
+<main class="wrap" style="max-width:420px;padding-top:40px"><div class="logo-row"><div class="logo">RC</div><h1>RC <span>TV</span></h1></div>
+<div class="box"><input class="f" id="nome" placeholder="Nome" style="display:none"><input class="f" id="email" type="email" placeholder="E-mail"><input class="f" id="senha" type="password" placeholder="Senha">
+<p id="msg" style="color:#ff5252;min-height:18px;font-size:13px"></p>
+<button class="btn" id="go" style="width:100%">Entrar</button><br><br><button class="btn o" id="g" style="width:100%">Entrar com Google</button>
+<p style="text-align:center;font-size:13px"><a href="#" id="sw">Criar conta</a> · <a href="#/redefinir">Esqueci a senha</a></p>
+<p style="text-align:center;font-size:12px"><a href="#/privacidade">Privacidade</a> · <a href="#/termos">Termos</a></p></div></main>
+</template><template id="t-site">
+<header><div class="wrap"><div class="logo-row"><div class="logo">RC</div><h1>RC <span>AO VIVO</span></h1></div><a href="#/" class="back" style="display:inline-block">← Início</a><input class="search" id="q" placeholder="Buscar canal..."><div class="tabs" id="tabs"></div></div></header>
+<main class="wrap"><div id="st" class="status">Carregando canais...</div><div id="grid" class="grid"></div></main>
+</template><template id="t-anime">
+<header><div class="wrap"><div class="logo-row"><div class="logo">RC</div><h1>RC <span>ANIMES</span></h1></div><a href="#/" class="back" style="display:inline-block">← Início</a><input class="search" id="q" placeholder="Buscar anime..."></div></header>
+<main class="wrap"><div id="st" class="status">Carregando animes...</div><div id="grid" class="grid"></div>
+<div id="view" style="display:none"><button class="back" id="bk">← Voltar</button><h2 id="hn"></h2><div id="temps"></div></div></main>
+</template><template id="t-musica"><style>body{padding-bottom:150px}.song{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer}.song:hover,.song.p{border-color:var(--red)}#pl{position:fixed;left:0;right:0;bottom:0;background:#111;border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none}#pl.on{display:block}#pl input{width:100%;accent-color:#e50914}.c{display:flex;justify-content:center;gap:10px;margin-top:6px}</style>
+<header><div class="wrap"><div class="logo-row"><div class="logo">RC</div><h1>RC <span>MÚSICAS</span></h1></div><a href="#/" class="back" style="display:inline-block">← Início</a><input class="search" id="q" placeholder="Buscar cantor..."><div class="tabs" id="tabs"></div></div></header>
+<main class="wrap"><div id="st" class="status">Carregando músicas...</div><div id="grid" class="grid"></div><div id="sv" style="display:none"><button class="back" id="bk">← Voltar</button><h2 id="sn"></h2><div id="sl"></div></div></main>
+<div id="pl"><div id="pt" style="font-size:13px;font-weight:700"></div><input type="range" id="sk" min="0" max="1000" value="0"><div class="c"><button class="b btn o" id="a">−10</button><button class="btn o" id="pv"><svg class="i"><use href="#i-prev"/></svg></button><button class="btn" id="pp"><svg class="i"><use href="#i-play"/></svg></button><button class="btn o" id="nx"><svg class="i"><use href="#i-next"/></svg></button><button class="btn o" id="f">+10</button></div><audio id="au" preload="none"></audio></div>
+</template><template id="t-player"><style>html,body{height:100%;background:#000;overflow:hidden}#w{position:fixed;inset:0;background:#000}video{width:100%;height:100%;object-fit:contain;background:#000}
+.bar{position:absolute;left:0;right:0;padding:12px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;transition:opacity .25s;background:linear-gradient(rgba(0,0,0,.8),transparent)}
+#top{top:env(safe-area-inset-top,0)}#bot{bottom:0;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.hide .bar{opacity:0;pointer-events:none}.hide{cursor:none}
+.b{background:rgba(20,20,20,.8);border:1px solid var(--line);color:#fff;border-radius:20px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer}.b:hover{border-color:var(--red)}
+select.b{padding:6px}#live{background:var(--red);border-color:var(--red);font-weight:700}
+#seek{flex:1 1 100%;accent-color:#e50914}#vol{width:80px;accent-color:#e50914}
+#t{font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#epg{font-size:12px;color:#ddd;flex:1 1 100%}
+#toast{position:absolute;top:70px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.75);border:1px solid var(--red);border-radius:16px;padding:6px 14px;display:none;font-size:13px}
+#err{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;background:#121212}
+google-cast-launcher{width:28px;height:28px;--connected-color:#e50914;--disconnected-color:#fff}</style>
+<div id="w"><video id="v" playsinline autoplay></video><div id="toast"></div>
+<div id="err"><h2 style="color:var(--red)"><svg class="i"><use href="#i-warn"/></svg> CANAL INDISPONÍVEL</h2><p style="color:var(--dim)" id="em">O sinal caiu ou você está sem internet.</p><button class="btn" id="retry">Tentar de novo</button> <button class="btn o" onclick="history.back()">Voltar</button></div>
+<div class="bar" id="top"><button class="b" onclick="history.length>1?history.back():location='#/site'">←</button><div id="t"></div><span class="b" id="live" style="display:none"><svg class="i"><use href="#i-dot"/></svg> AO VIVO</span><div id="epg"></div></div>
+<div class="bar" id="bot"><input type="range" id="seek" min="0" max="1000" value="0" style="display:none">
+<button class="b" id="pp"><svg class="i"><use href="#i-play"/></svg></button><button class="b" id="pv"><svg class="i"><use href="#i-prev"/></svg></button><button class="b" id="nx"><svg class="i"><use href="#i-next"/></svg></button><button class="b" id="mu"><svg class="i"><use href="#i-vol"/></svg></button><input type="range" id="vol" min="0" max="1" step=".05" value="1">
+<span id="tm" style="font-size:12px"></span><span style="flex:1"></span>
+<select class="b" id="ql" title="Qualidade"><option value="-1">Auto</option></select><select class="b" id="sp" title="Velocidade"></select>
+<button class="b" id="as">FIT</button><button class="b" id="pip">PiP</button><button class="b" id="ap" style="display:none">AirPlay</button><google-cast-launcher></google-cast-launcher><button class="b" id="fs"><svg class="i"><use href="#i-full"/></svg></button></div></div>
+<div class="modal" id="rs"><div class="in"><h3>Continuar de onde parou?</h3><p id="rt" style="color:var(--dim)"></p><button class="btn" id="rc">Continuar</button> <button class="btn o" id="rr">Recomeçar</button></div></div>
+
+
+</template><template id="t-settings">
+<header><div class="wrap"><div class="logo-row"><div class="logo">RC</div><h1>RC <span>CONFIGURAÇÕES</span></h1></div><a href="#/" class="back" style="display:inline-block">← Início</a></div></header>
+<main class="wrap"><div class="box"><h3>Conta</h3><p>Nome: <b id="n">-</b></p><p>E-mail: <b id="e">-</b></p><p>Cadastro: <b id="d">-</b></p>
+<a class="btn o" href="#/redefinir">Redefinir senha</a> <button class="btn" id="lo">Sair</button> <button class="btn o" id="del">Excluir conta</button></div>
+<div class="box"><h3>Sistema</h3><p>Versão: <span id="ver"></span></p><button class="btn o" id="cc">Limpar cache</button></div>
+<div class="box"><h3>Informações</h3><a href="#/privacidade">Privacidade</a> · <a href="#/termos">Termos</a> · <a href="https://wa.me/554898560314" target="_blank" rel="noopener">Suporte</a></div>
+<div class="box"><h3>Doe</h3><a href="https://livepix.gg/rcmaremoto" target="_blank" rel="noopener">PIX</a></div>
+<div class="box"><h3>Redes sociais</h3><a href="https://www.instagram.com/rc_maremoto" target="_blank" rel="noopener">Instagram</a> · <a href="https://t.me/+mhsznkK0j2o4OTUx" target="_blank" rel="noopener">Telegram</a> · <a href="https://whatsapp.com/channel/0029VaeMguw1iUxYl5OApG09" target="_blank" rel="noopener">WhatsApp</a></div></main>
+</template><template id="t-privacidade"><main class="wrap txt" style="max-width:650px;padding:20px 16px"><div class="logo-row"><div class="logo">RC</div><h1>RC <span>TV</span></h1></div><div class="box"><h2>POLÍTICA DE PRIVACIDADE</h2><p>O <b>RCTV</b> (REALLY CRAZY) coleta apenas nome, e-mail e, no login Google, a foto pública de perfil, para autenticar e exibir sua conta.</p><h3>Conteúdo</h3><p>O RCTV é apenas um reprodutor. Não hospeda conteúdo: os sinais vêm de servidores de terceiros.</p><h3>Exclusão</h3><p>Você pode excluir a conta em Configurações ou pelo suporte. Registros podem ser mantidos por 6 meses a 1 ano para segurança e obrigações legais.</p><h3>Terceiros</h3><p>Login e dados são processados pelo Firebase (Google).</p><p><a href="#/">← Voltar</a></p></div></main></template><template id="t-termos"><main class="wrap txt" style="max-width:650px;padding:20px 16px"><div class="logo-row"><div class="logo">RC</div><h1>RC <span>TV</span></h1></div><div class="box"><h2>TERMOS DE USO</h2><p>Ao usar o <b>RCTV</b> você concorda com estes termos.</p><h3>Natureza do serviço</h3><p>Acesso a transmissões de terceiros; não produzimos, gravamos nem hospedamos conteúdo.</p><h3>Responsabilidade</h3><p>A disponibilidade e legalidade dos sinais estão fora do nosso controle. Uso por sua conta e risco.</p><h3>Conta</h3><p>Mantenha sua senha em sigilo; é proibido burlar a segurança.</p><h3>Alterações</h3><p>O serviço e estes termos podem mudar a qualquer momento.</p><p><a href="#/">← Voltar</a></p></div></main></template><template id="t-redefinir">
+<main class="wrap" style="max-width:420px;padding-top:40px"><div class="box" style="text-align:center"><div class="logo" style="margin:0 auto 10px">RC</div><h2>Redefinir senha</h2><input class="f" id="e" type="email" placeholder="Digite seu e-mail"><button class="btn" id="b" style="width:100%">Redefinir senha</button><p id="m" style="font-weight:700"></p><a href="#/login">← Voltar</a></div></main>
+</template><script>
+// Config Firebase + utilitários compartilhados
+const firebaseConfig={apiKey:"AIzaSyDO4KqdFDwEdOXEYBKbLEGPy3V4toVJQPw",authDomain:"teste-27848.firebaseapp.com",databaseURL:"https://teste-27848-default-rtdb.firebaseio.com",projectId:"teste-27848",storageBucket:"teste-27848.firebasestorage.app",messagingSenderId:"392938631634",appId:"1:392938631634:android:df1450fce0fdd45dbb180b"};
+firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth(),db=firebase.database();
+const DRIVE_KEY="AIzaSyDwpPlFpKUZUbjfvhemIYiN1PoRZFTCPzA";
+const APP_VERSION="1.0"; // compare com /ATUALIZACAO/version update/version
+const EPG_PROXY=""; // ex.: "https://SEU-WORKER.workers.dev/?u=" (meuguia.tv bloqueia CORS)
+const IFRAME_PROXY=""; // opcional: Worker que abre o canal com Referer/Origin rdcanais.org
+const IC=n=>'<svg class="i"><use href="#i-'+n+'"/></svg>';
+const $=i=>document.getElementById(i);
+const h=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const ini=n=>(n||'?').trim().split(/\s+/).slice(0,2).map(p=>p[0]).join('').toUpperCase();
+// /d/{id}/view -> API do Drive (streaming direto, sem aviso de vírus)
+function driveUrl(u){if(!u||!/drive\.(usercontent\.)?google\.com/.test(u))return u;const m=u.match(/\/d\/([^\/?&#]+)/)||u.match(/[?&]id=([^&#]+)/);return m?`https://www.googleapis.com/drive/v3/files/${m[1]}?alt=media&key=${DRIVE_KEY}`:u}
+function needLogin(cb){auth.onAuthStateChanged(u=>u?cb(u):location.replace('login.html'))}
+function addRecent(it){const l=LS.get('rc_recent',[]).filter(x=>x.href!==it.href);l.unshift(it);LS.set('rc_recent',l.slice(0,10))}
+const favs=()=>LS.get('rc_favs',[]);
+function toggleFav(id){let f=favs();f=f.includes(id)?f.filter(x=>x!==id):f.concat(id);LS.set('rc_favs',f);return f.includes(id)}
+function logo(box,src,name){box.textContent='';if(src){const i=new Image();i.alt=name;i.onerror=()=>{box.textContent='';box.appendChild(h('div','fb',ini(name)))};i.src=src;box.appendChild(i)}else box.appendChild(h('div','fb',ini(name)))}
+
+const V={},T={"index": "RCTV", "login": "RCTV - Login", "site": "RC Ao Vivo", "anime": "RC Animes", "musica": "RC Músicas", "player": "RCTV Player", "settings": "RCTV - Configurações", "privacidade": "RCTV - POLÍTICA DE PRIVACIDADE", "termos": "RCTV - TERMOS DE USO", "redefinir": "RCTV - Redefinir senha"};
+V['index']=(root,P,$)=>{
+const tick=()=>{const d=new Date();$('clk').textContent=d.toLocaleTimeString('pt-BR');$('dt2').textContent=d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})};tick();setInterval(tick,1000);
+const net=()=>{$('net').textContent=navigator.onLine?'Online':'Offline';$('net').style.color=navigator.onLine?'#00e676':'#666'};net();addEventListener('online',net);addEventListener('offline',net);
+if(navigator.getBattery)navigator.getBattery().then(b=>{const u=()=>{const p=Math.round(b.level*100);$('bat').textContent=p+'%';$('bat').style.color=p<=15?'#f00':'#fff'};u();b.onlevelchange=u});
+
+needLogin(()=>{
+ const r=LS.get('rc_recent',[]);if(r.length){$('rec').append(h('h3',null,'Continuar assistindo'));const g=h('div','grid');r.forEach(x=>{const c=h('div','card');const t=h('div','thumb'+(x.dk?' dk':''));logo(t,x.logo,x.nome);const b=h('div','cb');b.append(h('div','cn',x.nome),h('div','cs',x.tipo));c.append(t,b);c.onclick=()=>location.href=x.href;g.append(c)});$('rec').append(g)}
+ const say=(t,m)=>{$('dt').textContent=t;$('dm').textContent=m;$('dlg').classList.add('on')};
+ db.ref('dialogo').once('value').then(s=>{const d=s.val()||{};if(d.msg&&d.msg!==LS.get('rc_msg',''))say(d.titulo||'AVISO',(LS.set('rc_msg',d.msg),d.msg))}).catch(()=>{});
+ db.ref('ATUALIZACAO').once('value').then(s=>{s.forEach(c=>{const v=c.val()||{};if(v.version&&String(v.version).trim()!==APP_VERSION&&!sessionStorage.upd){sessionStorage.upd=1;say(v['Título']||'Atualização',v['Descrição']||'Nova versão disponível')}})}).catch(()=>{});
+ $('filmes').onclick=e=>{e.preventDefault();db.ref('configuracoes/url_webview').once('value').then(s=>{const u=s.val();u?location.hash='#/player?'+new URLSearchParams({url:u,nome:'Filmes'}):alert('Link ainda não configurado')})};
+ let cat=null;const load=()=>cat||(cat=Promise.all([db.ref('conteudo/canais').once('value'),db.ref('conteudo/animes').once('value'),db.ref('conteudo/musicas').once('value')]));
+ $('q').oninput=async e=>{const q=e.target.value.trim().toLowerCase(),R=$('res');R.textContent='';if(q.length<2)return;const [c,a,m]=await load();const out=[];
+  c.forEach(k=>k.forEach(i=>{const v=i.val();if((v.nome||'').toLowerCase().includes(q))out.push([v.nome,'Canal','#/site?q='+encodeURIComponent(v.nome)])}));
+  a.forEach(i=>{const n=i.child('nome').val()||i.key;if(n.toLowerCase().includes(q))out.push([n,'Anime','#/anime?q='+encodeURIComponent(n)])});
+  m.forEach(g=>g.forEach(s=>{const n=s.child('_nome').val()||s.key;if(String(n).toLowerCase().includes(q))out.push([n,'Música','#/musica?q='+encodeURIComponent(n)])}));
+  out.slice(0,30).forEach(([n,t,hr])=>{const c=h('div','card');const b=h('div','cb');b.append(h('div','cn',n),h('div','cs',t));c.append(b);c.onclick=()=>location.href=hr;R.append(c)})};
+});
+};
+V['login']=(root,P,$)=>{
+
+let novo=false;const msg=t=>$('msg').textContent=t;
+auth.onAuthStateChanged(u=>{if(u)location.replace('#/')});
+$('sw').onclick=e=>{e.preventDefault();novo=!novo;$('nome').style.display=novo?'block':'none';$('go').textContent=novo?'Criar conta':'Entrar';$('sw').textContent=novo?'Já tenho conta':'Criar conta'};
+// a senha NÃO é gravada no banco (o app antigo gravava em texto puro; aqui isso foi removido)
+const salva=(u,n,s)=>db.ref('conta/'+u.uid).update({name:n||u.displayName||'',email:u.email,senha:s,data:new Date().toLocaleString('pt-BR'),uid:u.uid});
+$('go').onclick=async()=>{const e=$('email').value.trim(),s=$('senha').value,n=$('nome').value.trim();if(!e||!s||(novo&&!n))return msg('Preencha todos os campos');
+ try{if(novo){const r=await auth.createUserWithEmailAndPassword(e,s);await salva(r.user,n,'web')}else await auth.signInWithEmailAndPassword(e,s)}catch(x){msg(x.message)}};
+$('g').onclick=async()=>{try{const r=await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());await salva(r.user,null,'login via Google')}catch(x){msg(x.message)}};
+
+};
+V['site']=(root,P,$)=>{
+
+let cats={},ativa='__T',all=[];
+const ord=(a,b)=>(a.nome||'').localeCompare(b.nome||'','pt-BR',{sensitivity:'base',numeric:true});
+needLogin(()=>{$('q').value=new URLSearchParams(P.toString()).get('q')||'';
+db.ref('conteudo/canais').once('value').then(s=>{s.forEach(c=>{const l=[];c.forEach(i=>{const v=i.val()||{};l.push({nome:v.nome||'Canal',url:v.url||'',logo:v.logo||'',epg:v.epg||'',id:c.key+'/'+i.key})});cats[c.key]=l.sort(ord)});
+ const n=Object.keys(cats);if(!n.length){$('st').textContent='Nenhum canal cadastrado.';return}
+ ['__T','__F'].concat(n).forEach(k=>{const t=h('div','tab',k=='__T'?'TODOS':k=='__F'?'FAVORITOS':k);t.dataset.k=k;t.onclick=()=>{ativa=k;draw()};$('tabs').append(t)});draw()}).catch(e=>$('st').textContent='Erro: '+e.message)});
+function draw(){[...$('tabs').children].forEach(t=>t.classList.toggle('on',t.dataset.k==ativa));
+ let l=ativa=='__T'||ativa=='__F'?Object.values(cats).flat().sort(ord):cats[ativa];if(ativa=='__F')l=l.filter(c=>favs().includes(c.id));
+ const q=$('q').value.trim().toLowerCase();if(q)l=l.filter(c=>c.nome.toLowerCase().includes(q));
+ const g=$('grid');g.textContent='';$('st').style.display=l.length?'none':'block';$('st').textContent='Nenhum canal encontrado.';
+ l.forEach(c=>{const d=h('div','card'),t=h('div','thumb');logo(t,c.logo,c.nome);const b=h('div','cb');b.append(h('div','cn',c.nome));
+  const bt=h('button','btn','Assistir');bt.style.cssText='width:100%;margin-top:8px;padding:6px';b.append(bt);
+  const s=h('button','star'+(favs().includes(c.id)?' on':''));s.innerHTML=IC('star');s.onclick=e=>{e.stopPropagation();s.classList.toggle('on',toggleFav(c.id))};
+  const sh=h('button','star');sh.innerHTML=IC('share');sh.style.right='40px';sh.onclick=e=>{e.stopPropagation();const u={href:location.href.split('#')[0]+'#/player?'+new URLSearchParams({url:c.url,nome:c.nome,epg:c.epg})};navigator.share?navigator.share({title:c.nome,url:u.href}).catch(()=>{}):prompt('Copie o link:',u.href)};
+  d.append(t,b,s,sh);
+  const go=()=>{if(!c.url)return;const p=new URLSearchParams({url:c.url,nome:c.nome,epg:c.epg});const href='#/player?'+p;addRecent({nome:c.nome,logo:c.logo,tipo:'Canal',href});location.href=href};
+  d.onclick=go;g.append(d)})}
+$('q').oninput=draw;
+
+};
+V['anime']=(root,P,$)=>{
+
+let A=[],cur=null;
+needLogin(()=>{$('q').value=new URLSearchParams(P.toString()).get('q')||'';
+db.ref('conteudo/animes').once('value').then(s=>{s.forEach(a=>{const T=[];a.child('temporadas').forEach(t=>{const E=[];t.child('episodios').forEach(e=>{const u=e.val();if(typeof u=='string'&&u)E.push(u)});T.push({nome:t.child('nome').val()||t.key,breve:t.child('emBreve').val()===true,eps:E})});A.push({nome:a.child('nome').val()||a.key,capa:a.child('logo').val()||a.child('capa').val()||'',T})});
+ if(!A.length)return $('st').textContent='Nenhum anime cadastrado.';draw()}).catch(e=>$('st').textContent='Erro: '+e.message)});
+function draw(){const q=$('q').value.trim().toLowerCase(),l=A.filter(a=>!q||a.nome.toLowerCase().includes(q)),g=$('grid');g.textContent='';$('st').style.display=l.length?'none':'block';$('st').textContent='Nenhum anime encontrado.';
+ l.forEach(a=>{const c=h('div','card'),t=h('div','thumb dk');t.style.height='auto';t.style.aspectRatio='16/9';logo(t,a.capa,a.nome);const b=h('div','cb');b.append(h('div','cn',a.nome),h('div','cs',a.T.length+' temporada(s)'));c.append(t,b);c.onclick=()=>open_(a);g.append(c)})}
+$('q').oninput=draw;
+const chave=(a,t,e)=>a.nome+'_t'+(t+1)+'_ep'+(e+1);
+function open_(a){cur=a;$('hn').textContent=a.nome;const B=$('temps');B.textContent='';
+ a.T.forEach((t,ti)=>{B.append(h('h3',null,t.nome));if(t.breve||!t.eps.length)return B.append(h('p','cs','Em breve'));const r=h('div');r.style.cssText='display:flex;flex-wrap:wrap;gap:10px';
+  t.eps.forEach((u,ei)=>{const b=h('button','b');b.style.cssText='width:64px;height:64px;border-radius:14px;border:1px solid var(--red);background:'+(LS.get('rc_prog_'+chave(a,ti,ei),0)>0?'#1b5e20':'#1c1c1c')+';color:#fff;cursor:pointer';b.textContent=ei+1;b.onclick=()=>play(ti,ei);r.append(b)});B.append(r)});
+ $('grid').style.display=$('st').style.display='none';root.querySelector('.search').style.display='none';$('view').style.display='block';history.pushState({},'');scrollTo(0,0)}
+function back(){$('view').style.display='none';$('grid').style.display='';root.querySelector('.search').style.display='';draw()}
+$('bk').onclick=()=>history.back();addEventListener('popstate',()=>{if($('view').style.display!='none')back()});
+function play(t,e){const urls=[],ids=[];let p=0;cur.T.forEach((tt,ti)=>{if(tt.breve)return;tt.eps.forEach((u,ei)=>{if(ti==t&&ei==e)p=urls.length;urls.push(u);ids.push(chave(cur,ti,ei))})});
+ const href='#/player?'+new URLSearchParams({lista:JSON.stringify(urls),ids:JSON.stringify(ids),pos:p,nome:cur.nome});addRecent({nome:cur.nome,logo:cur.capa,dk:1,tipo:'Anime',href});location.href=href}
+addEventListener('pageshow',()=>{if(cur&&$('view').style.display!='none')open_.call(null,cur)});
+
+};
+V['musica']=(root,P,$)=>{
+
+let G={},cats=[],ativo=null,tocando=null,idx=-1,gen='__T';const au=$('au');
+needLogin(()=>{$('q').value=new URLSearchParams(P.toString()).get('q')||'';db.ref('conteudo/musicas').once('value').then(s=>{s.forEach(g=>{const L=[];g.forEach(c=>{const nm=String(c.child('_nome').val()||c.key).trim(),M=[];c.forEach(m=>{if(m.key=='_nome')return;const x=m.val();if(typeof x=='string')M.push({nome:m.key,url:x});else if(x)M.push({nome:x.nome||m.key,url:x.url||''})});if(M.length)L.push({nome:nm,genero:g.key,M})});G[g.key]=L});
+ const n=Object.keys(G);if(!n.length)return $('st').textContent='Nenhuma música cadastrada.';['__T'].concat(n).forEach(k=>{const t=h('div','tab',k=='__T'?'TODOS':k);t.dataset.k=k;t.onclick=()=>{gen=k;draw()};$('tabs').append(t)});draw()}).catch(e=>$('st').textContent='Erro: '+e.message)});
+function draw(){[...$('tabs').children].forEach(t=>t.classList.toggle('on',t.dataset.k==gen));let l=gen=='__T'?Object.values(G).flat():G[gen]||[];const q=$('q').value.trim().toLowerCase();if(q)l=l.filter(c=>c.nome.toLowerCase().includes(q));
+ const g=$('grid');g.textContent='';$('st').style.display=l.length?'none':'block';$('st').textContent='Nenhum cantor encontrado.';
+ l.forEach(c=>{const d=h('div','card'),t=h('div','thumb dk',ini(c.nome));t.style.cssText='font-size:28px;font-weight:800;background:linear-gradient(135deg,#e50914,#4a0e0e)';const b=h('div','cb');b.append(h('div','cn',c.nome),h('div','cs',c.M.length+' músicas'));d.append(t,b);d.onclick=()=>abrir(c);g.append(d)})}
+$('q').oninput=draw;
+function abrir(c){ativo=c;$('sn').textContent=c.nome;const L=$('sl');L.textContent='';c.M.forEach((m,i)=>{const r=h('div','song'+(tocando===c&&idx==i?' p':''));r.append(h('span','cs',i+1),h('span',null,m.nome.replace(/\s+/g,' ')));r.lastChild.style.flex=1;r.onclick=()=>tocar(c,i);L.append(r)});
+ ['grid','st'].forEach(i=>$(i).style.display='none');$('tabs').style.display=root.querySelector('.search').style.display='none';$('sv').style.display='block';history.pushState({},'')}
+function voltar(){$('sv').style.display='none';$('grid').style.display='';$('tabs').style.display='';root.querySelector('.search').style.display='';draw()}
+$('bk').onclick=()=>history.back();addEventListener('popstate',()=>{if($('sv').style.display!='none')voltar()});
+function tocar(c,i){const m=c.M[i];if(!m||!m.url)return alert('Música sem link.');tocando=c;idx=i;$('pt').textContent=m.nome+' — '+c.nome;$('pl').classList.add('on');au.src=driveUrl(m.url);au.play().catch(()=>{});abrir(c);history.back&&0}
+const step=d=>tocando&&tocar(tocando,(idx+d+tocando.M.length)%tocando.M.length);
+$('pv').onclick=()=>step(-1);$('nx').onclick=()=>step(1);$('pp').onclick=()=>au.paused?au.play():au.pause();$('a').onclick=()=>au.currentTime-=10;$('f').onclick=()=>au.currentTime+=10;
+au.onended=()=>step(1);au.onplay=()=>$('pp').innerHTML=IC('pause');au.onpause=()=>$('pp').innerHTML=IC('play');au.ontimeupdate=()=>{if(au.duration)$('sk').value=au.currentTime/au.duration*1000};$('sk').oninput=e=>{if(au.duration)au.currentTime=e.target.value/1000*au.duration};
+if('mediaSession'in navigator){navigator.mediaSession.setActionHandler('previoustrack',()=>step(-1));navigator.mediaSession.setActionHandler('nexttrack',()=>step(1))}
+
+};
+V['player']=(root,P,$)=>{
+
+const q=new URLSearchParams(P.toString()),v=$('v'),W=$('w');
+const parse=s=>{if(!s)return null;try{const a=JSON.parse(s);if(Array.isArray(a))return a}catch(e){}return s.replace(/^\[|\]$/g,'').split(',').map(x=>x.trim()).filter(Boolean)};
+const lista=parse(q.get('lista'))||(q.get('url')?[q.get('url')]:[]),ids=parse(q.get('ids'))||[],nome=q.get('nome')||'RCTV',live=!q.get('lista');
+let pos=+q.get('pos')||0,hls=null,mode=0,cat=1,going=false,curUrl='',hideT;
+const M=['FIT','ZOOM','ESTICAR'],FIT=['contain','cover','fill'],NP=['4:3','16:9','19:9','20:9','21:9','FAIXA LARGA','FAIXA EXTREMA'];
+const toast=t=>{const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',1800)};
+const key=i=>ids[i]||lista[i];
+// ---- proporção (mesma classificação do PlayerActivity) ----
+function classify(w,h){if(!h)return 1;const r=w/h;return r<1.55?0:r<1.95?1:r<2.17?2:r<2.28?3:r<2.45?4:r<3.4?5:6}
+function applyAspect(){cat=classify(v.videoWidth,v.videoHeight);let m=mode;if(m==1&&cat>=5)m=0;v.style.objectFit=FIT[m];$('as').textContent=M[m]+' · '+NP[cat]}
+function cycle(){mode=(mode+1)%3;if(mode==1&&cat>=5){mode=2;toast('Zoom desativado (formato muito largo)')}LS.set('rc_aspect',mode);applyAspect()}
+// ---- carregar ----
+function msg(t){$('em').textContent=t;$('err').style.display='flex'}
+function load(i,t0,r=0){pos=i;going=false;$('err').style.display='none';const raw=lista[i];if(!raw)return msg('Nada para reproduzir');
+ const url=curUrl=driveUrl(raw);$('t').textContent=nome+(lista.length>1?' • EP '+(i+1)+'/'+lista.length:'');
+ $('pv').style.display=$('nx').style.display=lista.length>1?'':'none';
+ if(hls){hls.destroy();hls=null}
+ v.onloadedmetadata=()=>{if(t0>0&&isFinite(v.duration)&&t0<v.duration-15)v.currentTime=t0;applyAspect()};
+ v.onerror=()=>{if(r<3)setTimeout(()=>load(i,t0||v.currentTime,r+1),1500);else msg('Não foi possível reproduzir. Tente novamente.')};
+ if(/\.m3u8/i.test(url)&&window.Hls&&Hls.isSupported()){
+  hls=new Hls({lowLatencyMode:true,enableWorker:true});hls.loadSource(url);hls.attachMedia(v);
+  hls.on(Hls.Events.MANIFEST_PARSED,(e,d)=>{$('ql').innerHTML='<option value="-1">Auto</option>'+d.levels.map((l,k)=>`<option value="${k}">${l.height?l.height+'p':Math.round(l.bitrate/1000)+'k'}</option>`).join('');v.play().catch(()=>{})});
+  hls.on(Hls.Events.ERROR,(e,d)=>{if(!d.fatal)return;if(r>=3)return msg('Canal indisponível. O sinal caiu ou o servidor bloqueou o acesso.');
+   if(d.type==Hls.ErrorTypes.MEDIA_ERROR){hls.recoverMediaError()}else setTimeout(()=>load(i,t0,r+1),1500)});
+ }else{v.src=url;v.play().catch(()=>{})}
+ const p=new URLSearchParams(P.toString());p.set('pos',i);addRecent({nome:nome,logo:'',tipo:live?'Canal':'Anime',href:'#/player?'+p});
+ $('seek').style.display=live?'none':'';$('live').style.display=live?'':'none';epg()}
+function next(){if(pos<lista.length-1){going=true;saveP(0,pos);load(pos+1,0)}}
+function saveP(t,i=pos){LS.set('rc_prog_'+key(i),Math.floor(t))}
+// ---- progresso: salva a cada 5 s, pula 5 s antes do fim ----
+setInterval(()=>{if(!live&&!v.paused&&v.currentTime>1)saveP(v.currentTime)},5000);
+v.ontimeupdate=()=>{if(live)return;if(isFinite(v.duration)){$('seek').value=v.currentTime/v.duration*1000;$('tm').textContent=f(v.currentTime)+' / '+f(v.duration);if(!going&&v.duration-v.currentTime<=5&&pos<lista.length-1)next()}};
+v.onended=()=>{if(!live){saveP(0);next()}};
+addEventListener('pagehide',()=>{if(!live&&v.currentTime>1)saveP(v.currentTime)});
+const f=s=>{s=Math.floor(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60);return(h?h+':'+String(m).padStart(2,'0'):m)+':'+String(s%60).padStart(2,'0')};
+// ---- controles ----
+$('pp').onclick=()=>v.paused?v.play():v.pause();$('pv').onclick=()=>pos>0&&load(pos-1,0);$('nx').onclick=()=>next();
+$('mu').onclick=()=>{v.muted=!v.muted;$('mu').innerHTML=IC(v.muted?'mute':'vol')};$('vol').oninput=e=>{v.volume=e.target.value;v.muted=false};
+$('seek').oninput=e=>{if(isFinite(v.duration))v.currentTime=e.target.value/1000*v.duration};
+$('ql').onchange=e=>{if(hls)hls.currentLevel=+e.target.value};
+[.5,.75,1,1.25,1.5,2].forEach(s=>$('sp').add(new Option(s+'x',s,false,s==1)));$('sp').onchange=e=>v.playbackRate=+e.target.value;
+$('as').onclick=cycle;$('live').onclick=()=>{if(isFinite(v.duration)&&v.duration)v.currentTime=v.duration-1;else if(hls&&hls.liveSyncPosition)v.currentTime=hls.liveSyncPosition;v.play()};
+$('pip').onclick=()=>document.pictureInPictureElement?document.exitPictureInPicture():v.requestPictureInPicture&&v.requestPictureInPicture().catch(()=>toast('PiP indisponível'));
+if(v.webkitShowPlaybackTargetPicker){$('ap').style.display='';$('ap').onclick=()=>v.webkitShowPlaybackTargetPicker()}
+const fs=()=>document.fullscreenElement?document.exitFullscreen():(W.requestFullscreen||v.webkitEnterFullscreen&&(()=>v.webkitEnterFullscreen())).call(W);$('fs').onclick=fs;
+v.onclick=()=>{cycle();show()};
+function show(){W.classList.remove('hide');clearTimeout(hideT);hideT=setTimeout(()=>{if(!v.paused)W.classList.add('hide')},3000)}
+['mousemove','touchstart','keydown'].forEach(e=>addEventListener(e,show));
+addEventListener('keydown',e=>{if(/INPUT|SELECT/.test(e.target.tagName)&&e.key!='Escape')return;const k=e.key.toLowerCase();
+ if(k==' '){e.preventDefault();$('pp').click()}else if(k=='m')$('mu').click();else if(k=='f')fs();else if(k=='arrowup'){v.volume=Math.min(1,v.volume+.1);$('vol').value=v.volume}else if(k=='arrowdown'){v.volume=Math.max(0,v.volume-.1);$('vol').value=v.volume}});
+// ---- EPG: mesma lógica do app (slug do meuguia.tv; precisa de EPG_PROXY por causa do CORS) ----
+const SL=Object.fromEntries('TVAPARECIDA:TAP,GLOOB:GOB,TVBRASIL:TED,REDETV:RTV,RECORDNEWS:RCN,BAND:BAN,RECORD:REC,RECORDTV:REC,TVCULTURA:CUL,CULTURA:CUL,AMC:MGM,CANALBRASIL:CBR,CINEMAX:MNX,HBO2:HB2,HBOFAMILY:HFA,HBOPLUS:HPL,HBOSIGNATURE:HFE,MEGAPIX:MPX,SPACE:SPA,TCMTURNERCLASSIC:TCM,TELECINEACTION:TC2,TELECINECULT:TC5,TELECINEFUN:TC6,TELECINEPREMIUM:TC1,TOUCH:TC3,TELECINETOUCH:TC3,TELECINEPIPOCA:TC4,AE:MDO,ANIMALPLANET:APL,DISCOVERYHDTHEATER:DHD,DISCOVERYTHEATER:DHD,EUROCHANNEL:EUR,REDEVIDA:VDA,TVGAZETA:GAZ,GAZETA:GAZ,FILMSARTS:BRA,LIFETIME:ANX,SONY:SET,STUDIOUNIVERSAL:HAL,TNTSERIES:TNS,UNIVERSALCHANNEL:USA,WARNERCHANNEL:WBT,BANDSPORTS:BSP,COMBATE:135,ESPN:ESP,ESPN2:ES2,ESPN3:ES3,ESPN5:ES5,ESPN4:ES4,CANALOFF:OFF,PREMIERECLUBES:121,SPORTV:SPO,SPORTV3:SP3,SPORTV2:SP2,BABYTV:BAB,CARTOONNETWORK:CAR,DISCOVERYKIDS:DIK,TOONCAST:TOC,ARTE1:BQ5,BIS:MSH,CANALRURAL:RUR,CANALDOBOI:BOI,E:EET,FUTURA:FUT,MULTISHOW:MSW,RAIINTERNACIONAL:RAI,REDEBOAVONTADE:LBV,SICINTERNACIONAL:SIC,TVESCOLA:ESC,TVESPANHA:TVE,TVJUSTICA:JUS,TVSENADO:SEN,TV5MONDE:TV5,TRAVELBOXBRASIL:TRB,VIVA:VIV,WOOHOO:WOO,DISCOVERYCHANNEL:DIS,DISCOVERYHOMEHEALTH:HEA,DISCOVERYSCIENCE:DSC,DISCOVERYTURBO:DTU,DISCOVERYWORLD:DIW,HISTORYCHANNEL:HIS,TLC:TRV,BBCWORLDNEWS:BBC,BANDNEWS:NEW,BLOOMBERG:BIT,CNNINTERNACIONAL:CNN,DEUSTCHEWELLE:DWL,GLOBONEWS:GLN,CANAL21:C21,GLOBO:GRD,GLOBORJ:GRD,DEUTSCHEWELLE:DWL,HISTORY:HIS'.split(',').map(x=>x.split(':')));
+const BL='aax.amazon-adsystem.com ad.admitad.com ad.crwdcntrl.net ad.yieldmo.com ads-api.tiktok.com ads.globo.com ads.linkedin.com ads.pinterest.com ads.pubmatic.com ads.rubiconproject.com ads.stickyadstv.com ads.tiktok.com ads.yahoo.com adserver.adtech.de adserver.yahoo.com adservice.google.com an.facebook.com analytics.google.com analytics.tiktok.com analytics.yahoo.com api.popads.net bidder.criteo.com c.amazon-adsystem.com cas.criteo.com connect.facebook.net googleads.g.doubleclick.net graph.facebook.com ib.adnxs.com incomeaccess_int.com mstage.globo.com nexus.ensighten.com odb.outbrain.com optimized-by.rubiconproject.com pagead2.googlesyndication.com pixel.quantserve.com s0.2mdn.net secure.adnxs.com securepubads.g.doubleclick.net servetm.popads.net snapads.com static.criteo.net stats.g.doubleclick.net tags.tiqcdn.com tappx.go2affise.com telemetry.microsoft.com tm.jsuol.com.br track.wbamedia.com tracking.mnetworks.com trc.taboola.com trk.suprclicks.com vortex.data.microsoft.com widgets.outbrain.com adjumpa.com brazino777.bet.br bet.br bet365.com betfair.com betano.com pixbet.com esportebet.com betnacional.com f12.bet kto.com galera.bet sportingbet.com betway.com 888casino.com jackpotcity.com betboo.com bodog.com cbet.com lampionsbet.com mega-pari.com betmotion.com apostaganhabr.com br.bet shopee mercadolivre amazon aliexpress shein magazineluiza casasbahia americanas submarino centauro dafiti extra.com.br pontofrio carrefour rihappy multicoisas webcoisas buscape zoom.com.br netshoes olx.com.br paodeacucar.com.br'.split(' '),blocked=u=>BL.some(d=>u.includes(d));
+const hm=ms=>{const d=new Date(ms);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};
+function slugOf(n,e){e=(e||'').trim();if(/^xml:/i.test(e))return'';let s;if(e){e=e.split('?')[0].replace(/\/+$/,'');s=e.slice(e.lastIndexOf('/')+1).toUpperCase().replace(/[^A-Z0-9]/g,'')}else{s=(n||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Z0-9]/g,'').replace(/(FHD|HD|SD|4K)$/,'');if(SL[s])s=SL[s];else if(s.length>4)s=''}return s}
+async function grade(slug){const ck='rc_epg_'+slug,c=LS.get(ck,null);if(c&&Date.now()-c.t<36e5)return c.j;
+ const html=await(await fetch(EPG_PROXY+encodeURIComponent('https://meuguia.tv/programacao/canal/'+slug))).text();
+ const txt=new DOMParser().parseFromString(html.replace(/<(script|style)[\s\S]*?<\/\1>/gi,' ').replace(/<\/(div|p|li|tr|h\d|section|article)>|<br\s*\/?>/gi,'\n'),'text/html').documentElement.textContent;
+ const L=txt.replace(/\u00a0/g,' ').split('\n').map(x=>x.trim()).filter(Boolean);
+ const dP=/^(?:domingo|segunda|terça|quarta|quinta|sexta|sábado)(?:-feira)?,\s*(\d{1,2})\/(\d{1,2})$/i,hP=/^(\d{1,2}):(\d{2})(?:\s+(.+))?$/;
+ const now=new Date(),ya=now.getFullYear(),ma=now.getMonth()+1,T=[];let dia=0,mes=0;
+ for(let i=0;i<L.length;i++){let m=L[i].match(dP);if(m){dia=+m[1];mes=+m[2];continue}m=L[i].match(hP);if(!m||!dia)continue;let t=m[3];if(!t){const n=L[i+1];if(!n||hP.test(n)||dP.test(n)||n=='NO AR'||n.startsWith('Publicidade'))continue;t=n}
+  let a=ya;if(mes<ma-6)a++;else if(mes>ma+6)a--;T.push({t,s:Date.UTC(a,mes-1,dia,+m[1]+3,+m[2])})} // Brasília = UTC-3
+ const j=T.map((x,i)=>({t:x.t,s:x.s,e:i+1<T.length?T[i+1].s:x.s+36e5})).filter(x=>x.e>x.s);LS.set(ck,{t:Date.now(),j});return j}
+async function getEpg(){const sl=slugOf(nome,q.get('epg'));if(!sl||!EPG_PROXY)return null;try{const j=await grade(sl),n=Date.now(),i=j.findIndex(x=>x.s<=n&&n<x.e);return i<0?null:{cur:j[i],nx:j[i+1]}}catch(e){return null}}
+async function epg(){$('epg').textContent='';if(!live)return;const r=await getEpg();if(r)$('epg').textContent='AGORA '+r.cur.t+' ('+hm(r.cur.s)+'-'+hm(r.cur.e)+')'+(r.nx?'  ·  A SEGUIR '+hm(r.nx.s)+' '+r.nx.t:'')}
+// ---- canais que não são .m3u8: iframe (igual ao ConfigActivity) + barra de EPG de 8 s + botão "i" ----
+function iframeMode(url){
+ if(blocked(url))return msg('Endereço bloqueado pela lista de anúncios.');
+ v.style.display='none';W.classList.add('ifm');
+ document.head.insertAdjacentHTML('beforeend','<style>.ifm .bar{display:none}.ov{position:absolute;z-index:5}#eb{left:50%;bottom:64px;transform:translateX(-50%);max-width:88%;padding:8px 14px;border-radius:6px;background:rgba(0,0,0,.72);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;opacity:0;transition:opacity .3s}#eb.on{opacity:1}#eb b{color:#4cb3ff;margin-right:6px}</style>');
+ const f=document.createElement('iframe');f.src=IFRAME_PROXY?IFRAME_PROXY+encodeURIComponent(url):url;f.allow='encrypted-media; fullscreen; autoplay';f.allowFullscreen=true;f.referrerPolicy='origin';
+ f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;background:#000';W.prepend(f);
+ const bk=h('button','b ov');bk.innerHTML=IC('back');bk.style.cssText='top:calc(10px + env(safe-area-inset-top,0px));left:10px';bk.onclick=()=>history.length>1?history.back():location.hash='#/site';
+ const nt=h('a','b ov','Abrir em nova aba');nt.href=url;nt.target='_blank';nt.rel='noopener';nt.style.cssText='top:calc(10px + env(safe-area-inset-top,0px));right:10px;color:#fff';
+ const eb=h('div','ov');eb.id='eb';const ib=h('button','b ov');ib.innerHTML=IC('info');ib.style.cssText='left:10px;bottom:10px;display:none';
+ W.append(bk,nt,eb,ib);toast('Este canal pode exibir anúncios');
+ getEpg().then(r=>{if(!r)return;let tm;const draw=()=>{const n=Date.now(),c=r.cur;eb.innerHTML='';const b=h('b',null,'AGORA');eb.append(b,document.createTextNode(c.t+(r.nx?'  ·  A seguir '+hm(r.nx.s)+' '+r.nx.t:'')))};
+  const show=()=>{draw();eb.className='ov on';clearTimeout(tm);tm=setTimeout(()=>eb.className='ov',8000)};ib.style.display='block';ib.onclick=show;show()})}
+v.addEventListener('play',()=>$('pp').innerHTML=IC('pause'));v.addEventListener('pause',()=>$('pp').innerHTML=IC('play'));
+// ---- Chromecast ----
+window.__onGCastApiAvailable=ok=>{if(!ok)return;try{const c=cast.framework.CastContext.getInstance();c.setOptions({receiverApplicationId:chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,autoJoinPolicy:chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED});
+ c.addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED,e=>{if(e.sessionState=='SESSION_STARTED'){const mi=new chrome.cast.media.MediaInfo(curUrl,/m3u8/i.test(curUrl)?'application/x-mpegURL':'video/mp4');c.getCurrentSession().loadMedia(new chrome.cast.media.LoadRequest(mi));v.pause()}})}catch(e){}};
+// ---- início (com diálogo de retomada) ----
+needLogin(()=>{const ru=(q.get('url')||'').trim();if(live&&!/\.m3u8/i.test(ru)){iframeMode(ru||'https://rdcanais.org/axn');return}mode=LS.get('rc_aspect',0);show();const s=live?0:LS.get('rc_prog_'+key(pos),0);
+ if(s>5){$('rt').textContent='Você parou em '+f(s)+'.';$('rs').classList.add('on');$('rc').onclick=()=>{$('rs').classList.remove('on');load(pos,s)};$('rr').onclick=()=>{$('rs').classList.remove('on');saveP(0);load(pos,0)}}else load(pos,0)});
+
+$('retry').onclick=()=>load(pos,0);{const s=document.createElement('script');s.src='https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1';document.head.append(s)}
+};
+V['settings']=(root,P,$)=>{
+
+$('ver').textContent=APP_VERSION;
+needLogin(u=>{db.ref('conta/'+u.uid).once('value').then(s=>{const v=s.val()||{};$('n').textContent=v.name||u.displayName||'-';$('e').textContent=v.email||u.email;$('d').textContent=v.data||'-'}).catch(()=>{$('e').textContent=u.email});
+ $('lo').onclick=()=>auth.signOut().then(()=>location.replace('#/login'));
+ $('del').onclick=async()=>{if(!confirm('Essa ação é permanente. Deseja continuar?'))return;try{await db.ref('conta/'+u.uid).remove();await u.delete();location.replace('#/login')}catch(e){alert('Faça login novamente antes de excluir a conta.')}}});
+$('cc').onclick=async()=>{try{(await caches.keys()).forEach(k=>caches.delete(k));Object.keys(localStorage).filter(k=>k.startsWith('rc_')&&k!='rc_aspect').forEach(k=>localStorage.removeItem(k));alert('Cache limpo')}catch(e){alert('Erro ao limpar')}};
+
+};
+V['privacidade']=(root,P,$)=>{
+
+};
+V['termos']=(root,P,$)=>{
+
+};
+V['redefinir']=(root,P,$)=>{
+$('b').onclick=()=>{const e=$('e').value.trim(),m=$('m');if(!e){m.style.color='#ff5252';return m.textContent='Digite seu e-mail.'}
+auth.sendPasswordResetEmail(e).then(()=>{m.style.color='#00e676';m.textContent='E-mail enviado! Verifique sua caixa de entrada.'}).catch(x=>{m.style.color='#ff5252';m.textContent='Erro: '+x.message})}
+};
+(function(){const [n,qs]=location.hash.replace(/^#\/?/,'').split('?');const name=V[n]?n:'index';document.title=T[name];
+const root=document.getElementById('app');root.append(document.getElementById('t-'+name).content.cloneNode(true));
+V[name](root,new URLSearchParams(qs||''),i=>root.querySelector('#'+i))})();
+addEventListener('hashchange',()=>location.reload()); // cada rota abre limpa (sem listeners acumulados)
+</script></body></html>
